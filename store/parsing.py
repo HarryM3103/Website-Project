@@ -24,9 +24,9 @@ def gpuCSV_parser():
                     gpu.current_price = float(line[4].split("$")[1].replace(",", ""))
             if line[5] != "":
                 try:
-                    gpu.current_price = float(line[5].split("$")[1])
+                    gpu.previous_price = float(line[5].split("$")[1])
                 except:
-                    gpu.current_price = float(line[5].split("$")[1].replace(",", ""))
+                    gpu.previous_price = float(line[5].split("$")[1].replace(",", ""))
             if line[6] != "":
                 gpu.savings = int(line[6].split("%")[0])
             if line[7] != "":
@@ -51,5 +51,9 @@ def sort_best_value():
     for item in item_list:
         item.bayasian_calc()
         bayasian_list.append(item)
-    sorted_bayasian = sorted(bayasian_list, key=lambda x: x.bayasian_avg, reverse=True)
-    return sorted_bayasian
+    sorted_bayasian = sorted(
+        bayasian_list,
+        key=lambda x: (x.bayasian_avg, -x.current_price, x.savings),
+        reverse=True,
+    )
+    return sorted_bayasian[:25]

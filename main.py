@@ -7,7 +7,7 @@ from store.gpuItem import GpuItem
 
 app = Flask(__name__)
 
-url = "https://www.newegg.com/p/pl?d=graphics+cards"
+url = "https://www.newegg.com/p/pl?d=ram"
 
 headers = [
     "Image Link",
@@ -137,6 +137,10 @@ def data_collector():
     return "GPU.csv"
 
 
+data_collector()
+
 sort = sort_best_value()
 for i in sort:
-    print(f"{i.bayasian_avg}: {i.brand}: {i.name}")
+    print(
+        f"{i.bayasian_avg}: {i.brand}: {i.link}: {i.ratings_num}: {i.current_price}: {i.savings}"
+    )

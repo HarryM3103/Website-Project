@@ -7,7 +7,7 @@ class GpuItem:
         name: str = None,
         current_price: float = None,
         previous_price: float = None,
-        savings: int = None,
+        savings: int = 0,
         shipping: str = None,
         item_rating: float = None,
         ratings_num: int = None,
