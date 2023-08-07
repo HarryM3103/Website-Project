@@ -1,13 +1,14 @@
 from bs4 import BeautifulSoup
+import json
 import requests
 import csv
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from store.parsing import gpuCSV_parser, sort_best_value
 from store.gpuItem import GpuItem
 
 app = Flask(__name__)
 
-url = "https://www.newegg.com/p/pl?d=ram"
+url = "https://www.newegg.com/p/pl?d=cpu"
 
 headers = [
     "Image Link",
@@ -25,7 +26,6 @@ headers = [
 # Create csv file for information
 
 
-@app.route("/data")
 def data_collector():
     with open("GPU.csv", "w") as f:
         writer = csv.writer(f)
@@ -137,10 +137,21 @@ def data_collector():
     return "GPU.csv"
 
 
-data_collector()
+# data_collector()
 
-sort = sort_best_value()
-for i in sort:
-    print(
-        f"{i.bayasian_avg}: {i.brand}: {i.link}: {i.ratings_num}: {i.current_price}: {i.savings}"
-    )
+
+@app.route("/")
+def data_parse():
+    info = sort_best_value()
+    return render_template("thing.html", info=info[1].brand)
+
+
+if __name__ == "__main__":
+    app.run(debug=True, port=8000)
+
+
+# sort = sort_best_value()
+# for i in sort:
+#     print(
+#         f"{i.bayasian_avg}: {i.brand}: {i.link}: {i.ratings_num}: {i.current_price}: {i.savings}"
+#     )
