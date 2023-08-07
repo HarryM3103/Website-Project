@@ -140,10 +140,17 @@ def data_collector():
 # data_collector()
 
 
+# Initialize the html file
 @app.route("/")
 def data_parse():
+    return render_template("thing.html")
+
+
+# Send the data from parsing.py to javascript via AJAX
+@app.route("/data_sent")
+def data_sent():
     info = sort_best_value()
-    return render_template("thing.html", info=info[1].brand)
+    return info[1].brand
 
 
 if __name__ == "__main__":
