@@ -45,9 +45,9 @@ def gpuCSV_parser():
     return gpu_List
 
 
-def sort_best_value():
+def sort_best_value() -> list[GpuItem]:
     item_list = gpuCSV_parser()
-    bayasian_list: GpuItem = []
+    bayasian_list: list[GpuItem] = []
     for item in item_list:
         item.bayasian_calc()
         bayasian_list.append(item)

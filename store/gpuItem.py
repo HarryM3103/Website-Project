@@ -5,7 +5,7 @@ class GpuItem:
         brand: str = None,
         link: str = None,
         name: str = None,
-        current_price: float = None,
+        current_price: float = 0,
         previous_price: float = None,
         savings: int = 0,
         shipping: str = None,
@@ -14,7 +14,7 @@ class GpuItem:
     ) -> None:
         self.image = image
         self.brand = brand
-        self.link = link = None
+        self.link = link
         self.name = name
         self.current_price = current_price
         self.previous_price = previous_price
