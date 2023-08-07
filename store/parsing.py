@@ -56,4 +56,7 @@ def sort_best_value() -> list[GpuItem]:
         key=lambda x: (x.bayasian_avg, -x.current_price, x.savings),
         reverse=True,
     )
-    return sorted_bayasian[:25]
+    result = []
+    for item in sorted_bayasian:
+        result.append(item.item_to_list())
+    return result[:25]

@@ -3,7 +3,11 @@ function thing(){
         url: '/data_sent',
         method: 'GET',
         success: function(result){
-            console.log(result)
+            print_thing(result)
         }
     })
+}
+
+function print_thing(data){
+    console.log(data)
 }

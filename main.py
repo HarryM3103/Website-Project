@@ -8,7 +8,7 @@ from store.gpuItem import GpuItem
 
 app = Flask(__name__)
 
-url = "https://www.newegg.com/p/pl?d=cpu"
+url = "https://www.newegg.com/p/pl?d=power+supply"
 
 headers = [
     "Image Link",
@@ -137,7 +137,7 @@ def data_collector():
     return "GPU.csv"
 
 
-# data_collector()
+data_collector()
 
 
 # Initialize the html file
@@ -150,7 +150,7 @@ def data_parse():
 @app.route("/data_sent")
 def data_sent():
     info = sort_best_value()
-    return info[1].brand
+    return info
 
 
 if __name__ == "__main__":
@@ -159,6 +159,4 @@ if __name__ == "__main__":
 
 # sort = sort_best_value()
 # for i in sort:
-#     print(
-#         f"{i.bayasian_avg}: {i.brand}: {i.link}: {i.ratings_num}: {i.current_price}: {i.savings}"
-#     )
+#     print(i)
