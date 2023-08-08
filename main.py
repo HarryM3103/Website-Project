@@ -8,7 +8,7 @@ from store.gpuItem import GpuItem
 
 app = Flask(__name__)
 
-url = "https://www.newegg.com/p/pl?d=power+supply"
+SEARCH = ""
 
 headers = [
     "Image Link",
@@ -26,10 +26,12 @@ headers = [
 # Create csv file for information
 
 
-def data_collector():
+def data_collector(search):
     with open("GPU.csv", "w") as f:
         writer = csv.writer(f)
         writer.writerow(headers)
+
+    url = "https://www.newegg.com/p/pl?d=" + search
 
     for pages in range(1, 15):
         site = requests.get(url + "&pages=" + str(pages))
@@ -137,18 +139,25 @@ def data_collector():
     return "GPU.csv"
 
 
-data_collector()
-
-
 # Initialize the html file
 @app.route("/")
 def data_parse():
     return render_template("thing.html")
 
 
+# Receive the item data that the user submits
+@app.route("/data_received", methods=["POST"])
+def data_received():
+    if request.method == "POST":
+        global SEARCH
+        SEARCH = request.form.get("name")
+        return ("", 204)
+
+
 # Send the data from parsing.py to javascript via AJAX
 @app.route("/data_sent")
 def data_sent():
+    data_collector(SEARCH)
     info = sort_best_value()
     return info
 
