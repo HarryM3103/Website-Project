@@ -13,10 +13,6 @@ function get_text(){
 }
 
 
-
-
-
-
 function thing(){
     $.ajax({
         url: '/data_sent',

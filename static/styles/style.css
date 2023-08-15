@@ -1,0 +1,69 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    letter-spacing: 0.3px;
+}
+
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+body{
+    background-color: orange;
+    /* .itemHolder{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    } */
+    
+
+    .card{
+        cursor: pointer;
+        display: flex;
+        background: white;
+        flex-direction: column;
+        min-width: 200px;
+        max-width: 300px;
+        text-align: center;
+        min-height: 370px;
+        border-radius: 1rem;
+        margin: 1.5rem;
+        transition: 0.3s;
+
+        &:hover{
+            transform: scale(1.1);
+        }
+
+        .cardText{
+            margin: 0.5rem;
+        }
+
+        .itemName{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            &:hover{
+                white-space: inherit;
+                text-overflow: inherit;
+                overflow: visible;
+            }
+        }
+
+        .brandText{
+            color: orange;
+        }
+
+        .itemPrice{
+            font-size: large;
+        }
+
+        .savingPercentage{
+            font-size: small;
+        }
+    }
+    
+}
