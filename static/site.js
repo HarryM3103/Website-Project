@@ -35,7 +35,7 @@ function parse_data(data){
                 <div class="cardText">
                     <h2 class="brandText">${data[i][1]}</h2>
                     <p class="itemName">${data[i][3]}</p>
-                    <h3 class="itemPrice">${data[i][4]}</h3>
+                    <h3 class="itemPrice">$${data[i][4]}</h3>
                     <h5 class="savingPercentage">${data[i][6]}% off</h5>
                     <h5 class="itemRating">${data[i][8]} ⭐</h5>
                     <h6 class="numRatings">${data[i][9]} ✍</h6>
