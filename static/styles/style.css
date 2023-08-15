@@ -13,11 +13,11 @@ a, a:hover, a:focus, a:active {
 
 body{
     background-color: orange;
-    /* .itemHolder{
+    .itemHolder{
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-    } */
+    }
     
 
     .card{
@@ -62,7 +62,10 @@ body{
         }
 
         .savingPercentage{
+            color: red;
             font-size: small;
+            font-style: italic;
+
         }
     }
     
