@@ -10,27 +10,9 @@ app = Flask(__name__)
 
 SEARCH = ""
 
-headers = [
-    "Image Link",
-    "Brand",
-    "Item Link",
-    "Item Name",
-    "Current Price",
-    "Previous Price",
-    "Savings",
-    "Shipping Price",
-    "Item rating",
-    "Number of ratings",
-]
-
-# Create csv file for information
-
 
 def data_collector(search):
-    with open("GPU.csv", "w") as f:
-        writer = csv.writer(f)
-        writer.writerow(headers)
-
+    data = []
     url = "https://www.newegg.com/p/pl?d=" + search
 
     for pages in range(1, 15):
@@ -117,8 +99,8 @@ def data_collector(search):
             except:
                 shipping = None
 
-            # Group data into list to be added csv file
-            data = [
+            # Group data into list
+            data_entries = [
                 item_img,
                 brand_info,
                 item_link,
@@ -130,13 +112,9 @@ def data_collector(search):
                 item_rating,
                 num_ratings,
             ]
+            data.append(data_entries)
 
-            # Add the parsed data to the csv file
-            with open("GPU.csv", "a", newline="") as g:
-                writer = csv.writer(g)
-                writer.writerow(data)
-
-    return "GPU.csv"
+    return data
 
 
 # Initialize the html file
@@ -159,11 +137,11 @@ def data_received():
 # Send the data from parsing.py to javascript via AJAX
 @app.route("/data_sent")
 def data_sent():
-    data_collector(
+    data = data_collector(
         SEARCH
     )  # Call the data_collector function that webscrapes the information from newegg.com
-    info = (
-        sort_best_value()
+    info = sort_best_value(
+        data
     )  # Set the variable to the return value of sort_best_value()
     return info  # return the list
 

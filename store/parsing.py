@@ -2,51 +2,44 @@ import csv
 from store.gpuItem import GpuItem
 
 
-def gpuCSV_parser():
+def gpuCSV_parser(data):
     gpu_List: list[GpuItem] = []
-    with open("GPU.csv", "r") as f:
-        counter = 0
-        reader = csv.reader(f)
-        next(reader, None)
-        for line in reader:
-            if counter != 1:
-                counter += 1
-                continue
-            gpu = GpuItem()
-            gpu.image = line[0]
-            gpu.brand = line[1]
-            gpu.link = line[2]
-            gpu.name = line[3]
-            if line[4] != "":
-                try:
-                    gpu.current_price = float(line[4].split("$")[1])
-                except:
-                    gpu.current_price = float(line[4].split("$")[1].replace(",", ""))
-            if line[5] != "":
-                try:
-                    gpu.previous_price = float(line[5].split("$")[1])
-                except:
-                    gpu.previous_price = float(line[5].split("$")[1].replace(",", ""))
-            if line[6] != "":
-                gpu.savings = int(line[6].split("%")[0])
-            if line[7] != "":
-                gpu.shipping = line[7]
-            if line[8] != "":
-                gpu.item_rating = float(line[8].split()[1])
-            if line[9] != "":
-                try:
-                    gpu.ratings_num = int(line[9])
-                except:
-                    gpu.ratings_num = int(line[9].replace(",", ""))
-            if any(x.name == line[3] for x in gpu_List):
-                continue
-            else:
-                gpu_List.append(gpu)
+    for entries in data:
+        gpu = GpuItem()
+        gpu.image = entries[0]
+        gpu.brand = entries[1]
+        gpu.link = entries[2]
+        gpu.name = entries[3]
+        if entries[4] is not None:
+            try:
+                gpu.current_price = float(entries[4].split("$")[1])
+            except:
+                gpu.current_price = float(entries[4].split("$")[1].replace(",", ""))
+        if entries[5] is not None:
+            try:
+                gpu.previous_price = float(entries[5].split("$")[1])
+            except:
+                gpu.previous_price = float(entries[5].split("$")[1].replace(",", ""))
+        if entries[6] is not None:
+            gpu.savings = int(entries[6].split("%")[0])
+        if entries[7] is not None:
+            gpu.shipping = entries[7]
+        if entries[8] is not None:
+            gpu.item_rating = float(entries[8].split()[1])
+        if entries[9] is not None:
+            try:
+                gpu.ratings_num = int(entries[9])
+            except:
+                gpu.ratings_num = int(entries[9].replace(",", ""))
+        if any(x.name == entries[3] for x in gpu_List):
+            continue
+        else:
+            gpu_List.append(gpu)
     return gpu_List
 
 
-def sort_best_value() -> list[GpuItem]:
-    item_list = gpuCSV_parser()
+def sort_best_value(data) -> list[GpuItem]:
+    item_list = gpuCSV_parser(data)
     bayasian_list: list[GpuItem] = []
     for item in item_list:
         item.bayasian_calc()
