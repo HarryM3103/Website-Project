@@ -24,13 +24,6 @@ def data_collector(search):
         for container in containers:
             # Item Image
             item_img = container.img["src"]
-            # Item brand
-            try:
-                brand_info = container.find("div", {"class": "item-branding"}).a.img[
-                    "title"
-                ]
-            except:
-                brand_info = None
 
             # Item link
             try:
@@ -43,6 +36,19 @@ def data_collector(search):
                 item_title = container.find("a", {"class": "item-title"}).text
             except:
                 item_title = None
+
+            # Item brand
+            try:
+                brand_info = container.find("div", {"class": "item-branding"}).a.img[
+                    "title"
+                ]
+            except:
+                if (item_title.split()[0].lower() == "be") or (
+                    item_title.split()[0].lower() == "cooler"
+                ):
+                    brand_info = f"{item_title.split()[0]} {item_title.split()[1]}"
+                else:
+                    brand_info = item_title.split()[0]
 
             # Item price (current)
             try:
@@ -113,6 +119,7 @@ def data_collector(search):
                 num_ratings,
             ]
             data.append(data_entries)
+            print(data_entries)
 
     return data
 
