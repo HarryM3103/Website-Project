@@ -65,6 +65,38 @@ a, a:hover, a:focus, a:active{
     width: 0px;
 }
 
+.loader{
+    position: fixed;
+    visibility: hidden;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.loader::after{
+    content: "";
+    width: 75px;
+    height: 75px;
+    border: 15px solid #dddddd;
+    border-top-color: tomato;
+    border-radius: 50%;
+    animation: loading 0.75s ease infinite;
+}
+
+@keyframes loading {
+    from{
+        transform: rotate(0turn);
+    }
+    to{
+        transform: rotate(1turn)
+    }
+}
+
 
 body{
     background-color: white;
@@ -77,7 +109,6 @@ body{
         flex-wrap: wrap;
         align-items: center;
     }
-
 
     
 
