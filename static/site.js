@@ -1,8 +1,20 @@
+var page_loaded = false;
+
 
 function send_data(){
     document.querySelector(".searchContainer").style.position= "absolute";
     document.querySelector(".searchContainer").style.top= "10%";
     document.querySelector(".searchContainer").style.transition = "0.5s"
+    if (page_loaded == true)
+    {
+        document.querySelector(".loader").style.visibility = "visible"
+    }
+    else{
+        setTimeout(function(){
+            document.querySelector(".loader").style.visibility = "visible"
+        }, 500)
+    }
+    
     var item_type = document.getElementById('item_type').value
     $.ajax({
         url: '/data_received',
@@ -11,7 +23,6 @@ function send_data(){
     // After the ajax 'POST' call is finished, call the ajax 'GET' function
     }).done(function(){  
         receive_data() 
-        console.log(item_type)
         document.getElementById('item_type').value = ""
         document.querySelector(".itemHolder").innerHTML = ""
     })
@@ -31,6 +42,9 @@ function receive_data(){
 function parse_data(data){
     const items = document.querySelector(".itemHolder");
     for (let i = 0; i < data.length; i+=1){
+        if (items.innerHTML != ""){
+            document.querySelector(".loader").style.visibility = "hidden"
+        }
         let code = `\
         <div class="card">
             <a href="${data[i][2]}">
@@ -48,4 +62,5 @@ function parse_data(data){
         `;
         items.innerHTML += code;
     }
+    page_loaded = true;
 }
