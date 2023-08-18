@@ -6,14 +6,14 @@
     letter-spacing: 0.3px;
 }
 
-a, a:hover, a:focus, a:active {
+a, a:hover, a:focus, a:active{
     text-decoration: none;
     color: inherit;
 }
 
 .searchContainer{
         position: absolute;
-        top: 10%;
+        top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         background: #2c3e50;
@@ -32,6 +32,12 @@ a, a:hover, a:focus, a:active {
     background: white;
 
 }
+
+.search-btn:hover > .searchContainer{
+    top: 10%;
+}
+
+
 
 .search-btn{
     color: #e67e22;
@@ -66,7 +72,7 @@ body{
     .itemHolder{
         position: absolute;
         top: 20%;
-        left: 4%;
+        left: 3%;
         display: flex;
         flex-wrap: wrap;
         align-items: center;

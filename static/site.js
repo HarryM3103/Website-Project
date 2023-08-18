@@ -1,5 +1,8 @@
 
 function send_data(){
+    document.querySelector(".searchContainer").style.position= "absolute";
+    document.querySelector(".searchContainer").style.top= "10%";
+    document.querySelector(".searchContainer").style.transition = "0.5s"
     var item_type = document.getElementById('item_type').value
     $.ajax({
         url: '/data_received',
