@@ -1,7 +1,8 @@
 import json
+import threading
 import csv
 from flask import Flask, render_template, request
-from store.parsing import gpuCSV_parser, sort_best_value, data_collector
+from store.parsing import sort_best_value, data_collector
 from store.gpuItem import GpuItem
 
 app = Flask(__name__)
