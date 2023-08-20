@@ -1,51 +1,47 @@
 var page_loaded = false;
 
+function send_data() {
+  document.querySelector(".searchContainer").style.position = "absolute";
+  document.querySelector(".searchContainer").style.top = "10%";
+  document.querySelector(".searchContainer").style.transition = "0.5s";
+  if (page_loaded == true) {
+    document.querySelector(".loader").style.visibility = "visible";
+  } else {
+    setTimeout(function () {
+      document.querySelector(".loader").style.visibility = "visible";
+    }, 500);
+  }
 
-function send_data(){
-    document.querySelector(".searchContainer").style.position= "absolute";
-    document.querySelector(".searchContainer").style.top= "10%";
-    document.querySelector(".searchContainer").style.transition = "0.5s"
-    if (page_loaded == true)
-    {
-        document.querySelector(".loader").style.visibility = "visible"
-    }
-    else{
-        setTimeout(function(){
-            document.querySelector(".loader").style.visibility = "visible"
-        }, 500)
-    }
-    
-    var item_type = document.getElementById('item_type').value
-    $.ajax({
-        url: '/data_received',
-        type: 'POST',
-        data: {'name': item_type},
+  var item_type = document.getElementById("item_type").value;
+  $.ajax({
+    url: "/data_received",
+    type: "POST",
+    data: { name: item_type },
     // After the ajax 'POST' call is finished, call the ajax 'GET' function
-    }).done(function(){  
-        receive_data() 
-        document.getElementById('item_type').value = ""
-        document.querySelector(".itemHolder").innerHTML = ""
-    })
+  }).done(function () {
+    receive_data();
+    document.getElementById("item_type").value = "";
+    document.querySelector(".itemHolder").innerHTML = "";
+  });
 }
 
-
-function receive_data(){
-    $.ajax({
-        url: '/data_sent',
-        method: 'GET',
-        success: function(result){
-            parse_data(result)
-        }
-    })
+function receive_data() {
+  $.ajax({
+    url: "/data_sent",
+    method: "GET",
+    success: function (result) {
+      parse_data(result);
+    },
+  });
 }
 
-function parse_data(data){
-    const items = document.querySelector(".itemHolder");
-    for (let i = 0; i < data.length; i+=1){
-        if (items.innerHTML != ""){
-            document.querySelector(".loader").style.visibility = "hidden"
-        }
-        let code = `\
+function parse_data(data) {
+  const items = document.querySelector(".itemHolder");
+  for (let i = 0; i < data.length; i += 1) {
+    if (items.innerHTML != "") {
+      document.querySelector(".loader").style.visibility = "hidden";
+    }
+    let code = `\
         <div class="card">
             <a href="${data[i][2]}">
             <img src="${data[i][0]}" alt="">
@@ -60,7 +56,7 @@ function parse_data(data){
             </a>   
         </div>
         `;
-        items.innerHTML += code;
-    }
-    page_loaded = true;
+    items.innerHTML += code;
+  }
+  page_loaded = true;
 }

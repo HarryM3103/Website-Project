@@ -1,164 +1,161 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    letter-spacing: 0.3px;
+@font-face {
+  font-family: Poppins;
+  src: url(/static/fonts/Poppins-ExtraLight.ttf);
 }
 
-a, a:hover, a:focus, a:active{
-    text-decoration: none;
-    color: inherit;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Poppins;
+  letter-spacing: 0.3px;
 }
 
-.searchContainer{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: #2c3e50;
-        height: 60px;
-        border-radius: 40px;
-        padding: 10px;
-    }
-
-.searchContainer:hover > .search-txt{
-    width: 450px;
-    padding: 0 6px;
-
+a,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: inherit;
 }
 
-.searchContainer:hover > .search-btn{
-    background: white;
-
+.searchContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #2c3e50;
+  height: 60px;
+  border-radius: 40px;
+  padding: 10px;
 }
 
-.search-btn:hover > .searchContainer{
-    top: 10%;
+.searchContainer:hover > .search-txt {
+  width: 450px;
+  padding: 0 6px;
 }
 
-
-
-.search-btn{
-    color: #e67e22;
-    float: right;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #2c3e50;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: 0.4s;
+.searchContainer:hover > .search-btn {
+  background: white;
 }
 
-.search-txt{
-    border: none;
-    background: none;
-    outline: none;
-    float: left;
-    padding: 0;
-    color: white;
-    font-size: 16px;
-    transition: 0.4s;
-    line-height: 40px;
-    width: 0px;
+.search-btn:hover > .searchContainer {
+  top: 10%;
 }
 
-.loader{
-    position: fixed;
-    visibility: hidden;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.search-btn {
+  color: #e67e22;
+  float: right;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #2c3e50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.4s;
 }
 
+.search-txt {
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+  padding: 0;
+  color: white;
+  font-size: 16px;
+  transition: 0.4s;
+  line-height: 40px;
+  width: 0px;
+}
 
-.loader::after{
-    content: "";
-    width: 75px;
-    height: 75px;
-    border: 15px solid #dddddd;
-    border-top-color: tomato;
-    border-radius: 50%;
-    animation: loading 0.75s ease infinite;
+.loader {
+  position: fixed;
+  visibility: hidden;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader::after {
+  content: "";
+  width: 75px;
+  height: 75px;
+  border: 15px solid #dddddd;
+  border-top-color: tomato;
+  border-radius: 50%;
+  animation: loading 0.75s ease infinite;
 }
 
 @keyframes loading {
-    from{
-        transform: rotate(0turn);
-    }
-    to{
-        transform: rotate(1turn)
-    }
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
 }
 
+body {
+  background-color: white;
 
-body{
-    background-color: white;
+  .itemHolder {
+    position: absolute;
+    top: 20%;
+    left: 3%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
 
-    .itemHolder{
-        position: absolute;
-        top: 20%;
-        left: 3%;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
+  .card {
+    cursor: pointer;
+    display: flex;
+    background: white;
+    flex-direction: column;
+    min-width: 200px;
+    max-width: 300px;
+    text-align: center;
+    min-height: 370px;
+    border-radius: 1rem;
+    margin: 1.5rem;
+    transition: 0.3s;
+
+    &:hover {
+      transform: scale(1.1);
     }
 
-    
-
-    .card{
-        cursor: pointer;
-        display: flex;
-        background: white;
-        flex-direction: column;
-        min-width: 200px;
-        max-width: 300px;
-        text-align: center;
-        min-height: 370px;
-        border-radius: 1rem;
-        margin: 1.5rem;
-        transition: 0.3s;
-
-        &:hover{
-            transform: scale(1.1);
-        }
-
-        .cardText{
-            margin: 0.5rem;
-        }
-
-        .itemName{
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-
-            &:hover{
-                white-space: inherit;
-                text-overflow: inherit;
-                overflow: visible;
-            }
-        }
-
-        .brandText{
-            color: orange;
-        }
-
-        .itemPrice{
-            font-size: large;
-        }
-
-        .savingPercentage{
-            color: red;
-            font-size: small;
-            font-style: italic;
-
-        }
+    .cardText {
+      margin: 0.5rem;
     }
-    
+
+    .itemName {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      &:hover {
+        white-space: inherit;
+        text-overflow: inherit;
+        overflow: visible;
+      }
+    }
+
+    .brandText {
+      color: orange;
+    }
+
+    .itemPrice {
+      font-size: large;
+    }
+
+    .savingPercentage {
+      color: red;
+      font-size: small;
+      font-style: italic;
+    }
+  }
 }
