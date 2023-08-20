@@ -1,5 +1,6 @@
 import json
 import threading
+from queue import Queue
 import csv
 from flask import Flask, render_template, request
 from store.parsing import sort_best_value, data_collector
@@ -30,11 +31,25 @@ def data_received():
 # Send the data from parsing.py to javascript via AJAX
 @app.route("/data_sent")
 def data_sent():
-    data = data_collector(
-        SEARCH
-    )  # Call the data_collector function that webscrapes the information from newegg.com
+    data = []
+    pure_data = []
+    threads = []
+    q = Queue()
+    for i in range(14):
+        t = threading.Thread(target=data_collector, args=(SEARCH, i, q,))
+        t.daemon = True
+        threads.append(t)
+
+    for i in range(14):
+        threads[i].start()
+
+    for i in range(14):
+        threads[i].join()
+
+    for info in list(q.get()):
+        pure_data.append(info)
     info = sort_best_value(
-        data
+        pure_data
     )  # Set the variable to the return value of sort_best_value()
     return info  # return the list
 
