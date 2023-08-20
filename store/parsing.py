@@ -2,7 +2,7 @@ import csv
 import queue
 import requests
 from bs4 import BeautifulSoup
-from store.gpuItem import GpuItem
+from store.ProductItem import ProductItem
 
 
 def data_collector(search, page_num, data_store):
@@ -120,14 +120,15 @@ def data_collector(search, page_num, data_store):
                 item_rating,
                 num_ratings,
             ]
+            print(data_entries)
             data.append(data_entries)
     data_store.put(data)
 
 
-def gpuCSV_parser(data):
-    gpu_List: list[GpuItem] = []
+def item_parser(data):
+    gpu_List: list[ProductItem] = []
     for entries in data:
-        gpu = GpuItem()
+        gpu = ProductItem()
         gpu.image = entries[0]
         gpu.brand = entries[1]
         gpu.link = entries[2]
@@ -165,9 +166,9 @@ def gpuCSV_parser(data):
     return gpu_List
 
 
-def sort_best_value(data) -> list[GpuItem]:
-    item_list = gpuCSV_parser(data)
-    bayasian_list: list[GpuItem] = []
+def sort_best_value(data) -> list[ProductItem]:
+    item_list = item_parser(data)
+    bayasian_list: list[ProductItem] = []
     for item in item_list:
         item.bayasian_calc()
         bayasian_list.append(item)

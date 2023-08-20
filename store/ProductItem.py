@@ -1,4 +1,4 @@
-class GpuItem:
+class ProductItem:
     def __init__(
         self,
         image: str = None,
@@ -29,7 +29,8 @@ class GpuItem:
             self.item_rating = 3
             self.ratings_num = 1
         new_ratings = 2 + self.ratings_num
-        self.bayasian_avg = ((self.item_rating * self.ratings_num) + 4) / new_ratings
+        self.bayasian_avg = (
+            (self.item_rating * self.ratings_num) + 4) / new_ratings
 
     def item_to_list(self):
         string_list = []

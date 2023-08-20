@@ -4,11 +4,12 @@ from queue import Queue
 import csv
 from flask import Flask, render_template, request
 from store.parsing import sort_best_value, data_collector
-from store.gpuItem import GpuItem
+from store.ProductItem import ProductItem
 
 app = Flask(__name__)
 
 SEARCH = ""
+PAGES_TO_SEARCH = 14
 
 
 # Initialize the html file
@@ -28,30 +29,41 @@ def data_received():
         return ("", 204)  # return a response
 
 
-# Send the data from parsing.py to javascript via AJAX
-@app.route("/data_sent")
-def data_sent():
-    data = []
-    pure_data = []
-    threads = []
-    q = Queue()
-    for i in range(14):
-        t = threading.Thread(target=data_collector, args=(SEARCH, i, q,))
-        t.daemon = True
-        threads.append(t)
+def threading_search():
+    pure_data = []  # Declare the optimized data list, pure_data
+    threads = []  # Declare the threads list
+    q = Queue()  # Instantiate the queue object
 
-    for i in range(14):
+    # Make as many threads as there are pages to search
+    for i in range(PAGES_TO_SEARCH):
+        # Instantiate the the thread, giving the "data_collector()" as the target function
+        t = threading.Thread(target=data_collector, args=(SEARCH, i, q,))
+        t.daemon = True  # Set daemon to true
+        threads.append(t)  # Append the thread to the threads list
+
+    # Loop through the threads list and start the threads
+    for i in range(PAGES_TO_SEARCH):
         threads[i].start()
 
-    for i in range(14):
+    # Loop through the threads list and join the threads
+    for i in range(PAGES_TO_SEARCH):
         threads[i].join()
 
+    # Loop throught the queue containing the raw data from "data_collector()"
     for info in list(q.get()):
+        # Append the raw data to the optimized data list
         pure_data.append(info)
     info = sort_best_value(
         pure_data
-    )  # Set the variable to the return value of sort_best_value()
-    return info  # return the list
+    )  # Set the variable, info,  to the return value of sort_best_value()
+    return info
+# Send the data from parsing.py to javascript via AJAX
+
+
+@app.route("/data_sent")
+def data_sent():
+    frontend_info = threading_search()
+    return frontend_info   # return the info to the frontend
 
 
 if __name__ == "__main__":
