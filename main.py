@@ -57,7 +57,7 @@ def threading_search():
         pure_data
     )  # Set the variable, info,  to the return value of sort_best_value()
     return info
-# Send the data from parsing.py to javascript via AJAX
+    # Send the data from parsing.py to javascript via AJAX
 
 
 @app.route("/data_sent")

@@ -1,9 +1,10 @@
-var page_loaded = false;
+var page_loaded = false; //Global variable determining if the page has already been loaded with content
 
+//Function that sends the user's search field data to the backend to be processed
 function send_data() {
-  document.querySelector(".searchContainer").style.position = "absolute";
-  document.querySelector(".searchContainer").style.top = "10%";
-  document.querySelector(".searchContainer").style.transition = "0.5s";
+  document.querySelector(".searchContainer").style.position = "absolute"; //Sets the search box's position to 'absolute'
+  document.querySelector(".searchContainer").style.top = "10%"; //Moves the search box to the top of the page
+  document.querySelector(".searchContainer").style.transition = "0.5s"; //Adds a transition animation to the search box being moved to the top of the page
   if (page_loaded == true) {
     document.querySelector(".loader").style.visibility = "visible";
   } else {

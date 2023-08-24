@@ -1,5 +1,3 @@
-import csv
-import queue
 import requests
 from bs4 import BeautifulSoup
 from store.ProductItem import ProductItem
@@ -120,7 +118,6 @@ def data_collector(search, page_num, data_store):
                 item_rating,
                 num_ratings,
             ]
-            print(data_entries)
             data.append(data_entries)
     data_store.put(data)
 
