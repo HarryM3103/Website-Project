@@ -6,6 +6,7 @@ from flask import Flask, render_template, request
 from store.parsing import sort_best_value, data_collector
 from store.ProductItem import ProductItem
 
+
 app = Flask(__name__)
 
 SEARCH = ""

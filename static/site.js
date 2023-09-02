@@ -42,6 +42,7 @@ function parse_data(data) {
     if (items.innerHTML != "") {
       document.querySelector(".loader").style.visibility = "hidden";
     }
+    // document.documentElement.style.setProperty('--rating', rating)
     let code = `\
         <div class="card">
             <a href="${data[i][2]}">
@@ -50,9 +51,11 @@ function parse_data(data) {
                     <h2 class="brandText">${data[i][1]}</h2>
                     <p class="itemName">${data[i][3]}</p>
                     <h3 class="itemPrice">$${data[i][4]}</h3>
-                    <h5 class="savingPercentage">${data[i][6]}% off</h5>
-                    <h5 class="itemRating">${data[i][8]} ⭐</h5>
-                    <h6 class="numRatings">${data[i][9]} ✍</h6>
+                    <h5 class="savingPercentage">${data[i][6]}% OFF!</h5>
+                    <div class="rating">
+                        <h5 class=rating_num>${data[i][8]} <i class="fa-solid fa-star"></i> </h5>
+                    </div>  
+                    <h6 class="numRatings">${data[i][9]} ratings</h6>
                 </div>
             </a>   
         </div>

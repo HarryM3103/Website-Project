@@ -134,8 +134,11 @@ def item_parser(data):
             try:
                 gpu.current_price = float(entries[4].split("$")[1])
             except:
-                gpu.current_price = float(
+                try:
+                    gpu.current_price = float(
                     entries[4].split("$")[1].replace(",", ""))
+                except:
+                    continue
         if entries[5] is not None:
             try:
                 gpu.previous_price = float(entries[5].split("$")[1])
@@ -164,7 +167,7 @@ def item_parser(data):
 
 
 def sort_best_value(data) -> list[ProductItem]:
-    item_list = item_parser(data)
+    item_list: list[ProductItem] = item_parser(data)
     bayasian_list: list[ProductItem] = []
     for item in item_list:
         item.bayasian_calc()
@@ -174,7 +177,7 @@ def sort_best_value(data) -> list[ProductItem]:
         key=lambda x: (x.bayasian_avg, -x.current_price, x.savings),
         reverse=True,
     )
-    result = []
+    result: list[ProductItem] = []
     for item in sorted_bayasian:
         result.append(item.item_to_list())
     return result[:25]

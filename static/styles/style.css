@@ -3,6 +3,13 @@
   src: url(/static/fonts/Poppins-ExtraLight.ttf);
 }
 
+:root{
+  --accent: #ffb145;
+  --primary: #121212;
+  --secondary: #414141;
+  --starMargin: 8px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -99,13 +106,22 @@ a:active {
   }
 }
 
+img {
+  border-radius: 10%;
+  position: relative;
+  top: 10px;
+  width: 275px;
+  height: 200px;
+}
+
 body {
   background-color: white;
 
-  .itemHolder {
+  .itemHolder{
     position: absolute;
+    height: 90vh;
     top: 20%;
-    left: 3%;
+    left: 1%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -114,7 +130,7 @@ body {
   .card {
     cursor: pointer;
     display: flex;
-    background: white;
+    background: black;
     flex-direction: column;
     min-width: 200px;
     max-width: 300px;
@@ -123,16 +139,19 @@ body {
     border-radius: 1rem;
     margin: 1.5rem;
     transition: 0.3s;
+    box-shadow: 0px 12px 20px 0 rgba(25, 25, 25, 0.5);
 
     &:hover {
       transform: scale(1.1);
     }
+
 
     .cardText {
       margin: 0.5rem;
     }
 
     .itemName {
+      color: white;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -149,13 +168,42 @@ body {
     }
 
     .itemPrice {
-      font-size: large;
+      color: white;
+      font-size: 30px;
+    }
+
+    .rating{
+      flex-direction: row;
+      position:relative;
+      --rating: 5;
+      --stop: calc(var(--rating) / 5 * 100% - var(--starMargin)/2);
+      background-image: linear-gradient(
+         to right,
+         var(--accent) var(--stop),
+         var(--secondary) var(--stop) 
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+    
+    
+    .rating *{
+      font-size: 20px;
+      color: transparent;
+      margin-right: var(--starMargin);
+    }
+
+
+    .numRatings{
+      font-size: 15px;
+      color: white;
     }
 
     .savingPercentage {
-      color: red;
-      font-size: small;
-      font-style: italic;
+      color: var(--accent);
+      font-size: 20px;
     }
   }
 }
+
+
