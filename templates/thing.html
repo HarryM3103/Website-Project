@@ -20,6 +20,56 @@
     />
   </head>
   <body>
+    
+
+    <div class="btn">
+      <span class="fas fa-bars"></span>
+    </div>
+    <nav class="sidebar">
+        <div class="text">Side Menu</div>
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">About Us
+              <span class="fa-solid fa-question"></span>
+            </a></li>
+            <li>
+                <a href="#" class="store-btn">Store Sections
+                    <span class="fas fa-caret-down first"></span>
+                </a>
+                <ul class="store-show">
+                    <li><a href="#">Graphics Cards</a></li>
+                    <li><a href="#">CPU's</a></li>
+                    <li><a href="#">Motherboards</a></li>
+                    <li><a href="#">Ram</a></li>
+                    <li><a href="#">Storage</a></li>
+                    <li><a href="#">Power Supplies</a></li>
+                    <li><a href="#">Cases</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Favorites
+              <span class="fa-solid fa-heart"></span>
+            </a></li>
+            <li><a target="_blank" rel="noopener noreferrer" href="https://forms.gle/hW2Bq6HYBHV4N3ZK6">Feedback
+              <span class="fa-solid fa-pen-to-square"></span>
+            </a></li>
+        </ul>
+    </nav>
+    
+    <script>
+    $('.btn').click(function(){
+        $(this).toggleClass("click");
+        $('.sidebar').toggleClass("show");
+    })
+        $('.store-btn').click(function(){
+            $('nav ul .store-show').toggleClass("show");
+            $('nav ul .first').toggleClass("rotate");
+        });
+        $('nav ul li').click(function(){
+            $(this).addClass("active").siblings().removeClass("active");
+        })
+    </script>
+
+
     <div class="loader"></div>
     <div class="searchContainer">
       <input
