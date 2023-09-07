@@ -1,7 +1,6 @@
 var page_loaded = false; //Global variable determining if the page has already been loaded with content
-const jeff = 14;
 
-jeff = 12;
+// TODO Finish documenting site.js
 
 //Function that sends the user's search field data to the backend to be processed
 function send_data() {
@@ -48,7 +47,7 @@ function parse_data(data) {
     // document.documentElement.style.setProperty('--rating', rating)
     let code = `\
         <div class="card">
-            <a target="_blank" rel="noopener noreferrer" href="${data[i][2]}">
+            <a class="product-link "target="_blank" rel="noopener noreferrer" href="${data[i][2]}">
             <img src="${data[i][0]}" alt="">
                 <div class="cardText">
                     <h2 class="brandText">${data[i][1]}</h2>
@@ -65,5 +64,6 @@ function parse_data(data) {
         `;
     items.innerHTML += code;
   }
+  document.querySelector(".img-area").style.height = "650vh";
   page_loaded = true;
 }

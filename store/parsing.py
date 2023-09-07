@@ -2,6 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 from store.ProductItem import ProductItem
 
+# TODO Finish documenting parsing.py
+
 
 def data_collector(search, page_num, data_store):
     data = []
@@ -136,7 +138,7 @@ def item_parser(data):
             except:
                 try:
                     gpu.current_price = float(
-                    entries[4].split("$")[1].replace(",", ""))
+                        entries[4].split("$")[1].replace(",", ""))
                 except:
                     continue
         if entries[5] is not None:
@@ -180,4 +182,4 @@ def sort_best_value(data) -> list[ProductItem]:
     result: list[ProductItem] = []
     for item in sorted_bayasian:
         result.append(item.item_to_list())
-    return result[:25]
+    return result[:50]

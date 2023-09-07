@@ -19,15 +19,23 @@
 }
 
 
-a,
-a:hover,
-a:active {
+.search-btn,
+.search-btn:hover,
+.search-btn:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+.product-link,
+.product-link:hover,
+.product-link:active {
   text-decoration: none;
   color: inherit;
 }
 
 .btn{
-  position: absolute;
+  z-index: 2;
+  position: fixed;
   top: 15px;
   left: 45px;
   height: 45px;
@@ -55,9 +63,10 @@ a:active {
 
 .sidebar{
   z-index: 2;
+  top: 0px;
   position: fixed;
   width: 250px;
-  height: 100%;
+  height: 100vh;
   left: -250px;
   background-color: #1b1b1b;
   transition: left 0.4s ease;
@@ -169,7 +178,7 @@ nav ul li a span.rotate{
 }
 
 .searchContainer:hover > .search-txt {
-  width: 450px;
+  width: 30vw;
   padding: 0 6px;
 }
 
@@ -246,8 +255,21 @@ img {
   height: 200px;
 }
 
-body {
-  background-color: white;
+
+
+.img-area{
+    background-image: url(/static/imgs/149687.jpg);
+    background-size: cover;
+    -webkit-background-size: cover;
+    background-repeat:no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    filter: blur(4px);
+
+  }
+
+
 
   .itemHolder{
     position: absolute;
@@ -341,6 +363,5 @@ body {
       font-size: 20px;
     }
   }
-}
 
 
