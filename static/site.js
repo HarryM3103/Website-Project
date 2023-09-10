@@ -20,11 +20,12 @@ function send_data() {
     url: "/data_received",
     type: "POST",
     data: { name: item_type },
-    // After the ajax 'POST' call is finished, call the ajax 'GET' function
+    // After the ajax 'POST' call is finished, call the ajax 'GET' function, receive_data()
   }).done(function () {
     receive_data();
     document.getElementById("item_type").value = "";
-    document.querySelector(".itemHolder").innerHTML = "";
+    document.querySelector(".items-table").innerHTML = "";
+    document.querySelector(".table").style.visibility = "hidden";
   });
 }
 
@@ -39,31 +40,28 @@ function receive_data() {
 }
 
 function parse_data(data) {
-  const items = document.querySelector(".itemHolder");
+  const items = document.querySelector(".items-table");
   for (let i = 0; i < data.length; i += 1) {
     if (items.innerHTML != "") {
       document.querySelector(".loader").style.visibility = "hidden";
     }
     // document.documentElement.style.setProperty('--rating', rating)
     let code = `\
-        <div class="card">
-            <a class="product-link "target="_blank" rel="noopener noreferrer" href="${data[i][2]}">
-            <img src="${data[i][0]}" alt="">
-                <div class="cardText">
-                    <h2 class="brandText">${data[i][1]}</h2>
-                    <p class="itemName">${data[i][3]}</p>
-                    <h3 class="itemPrice">$${data[i][4]}</h3>
-                    <h5 class="savingPercentage">${data[i][6]}% OFF!</h5>
-                    <div class="rating">
-                        <h5 class=rating_num>${data[i][8]} <i class="fa-solid fa-star"></i> </h5>
-                    </div>  
-                    <h6 class="numRatings">${data[i][9]} ratings</h6>
-                </div>
-            </a>   
-        </div>
+        <tr onclick="window.location='${data[i][2]}';">
+            <td>${i+1}</td>
+            <td><img src=${data[i][0]} alt=""></td>
+            <td>${data[i][1]}</td>
+            <td>${data[i][3]}</td>
+            <td>$${data[i][4]}</td>
+            <td>${data[i][6]}%</td>
+            <td>${data[i][8]}</td>
+            <td>${data[i][9]}</td>
+        </tr>
         `;
     items.innerHTML += code;
   }
-  document.querySelector(".img-area").style.height = "650vh";
+  document.querySelector(".table").style.visibility = "visible";
   page_loaded = true;
 }
+
+

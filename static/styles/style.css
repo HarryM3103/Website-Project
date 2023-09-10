@@ -18,6 +18,9 @@
   letter-spacing: 0.3px;
 }
 
+body {
+    background: white
+}
 
 .search-btn,
 .search-btn:hover,
@@ -247,17 +250,17 @@ nav ul li a span.rotate{
   }
 }
 
-img {
+/* img {
   border-radius: 10%;
   position: relative;
   top: 10px;
   width: 275px;
   height: 200px;
-}
+} */
 
 
 
-.img-area{
+/* .img-area{
     background-image: url(/static/imgs/149687.jpg);
     background-size: cover;
     -webkit-background-size: cover;
@@ -267,7 +270,7 @@ img {
     min-height: 100vh;
     filter: blur(4px);
 
-  }
+  } */
 
 
 
@@ -361,6 +364,97 @@ img {
     .savingPercentage {
       color: var(--accent);
       font-size: 20px;
+    }
+  }
+
+   main.table{
+    width: 180vh;
+    height: 80vh;
+    background-color: rgba(255, 255, 255, 0.067);
+
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0.4rem 0.8rem #0005;
+    border-radius: 0.8rem;
+
+    position: relative;
+    top: 120px;
+    left: 50px;
+    overflow: hidden;
+    visibility: hidden;
+  }
+
+  .table__header {
+    width: 100%;
+    height: 10%;
+    background-color: #fff4;
+    padding: 0.8rem 1rem
+  }
+
+  .table__body {
+    width: 95%;
+    max-height: calc(89% - 1.6rem);
+    background-color: rgba(26, 26, 26, 0.733);
+
+    margin: 0.8rem auto;
+    border-radius: 0.6rem;
+
+    overflow: auto;
+  }
+
+  .table__body::-webkit-scrollbar{
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+
+  .table__body::-webkit-scrollbar-thumb{
+    border-radius: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.267);
+    visibility: hidden;
+  }
+
+  .table__body:hover::-webkit-scrollbar-thumb{
+    visibility: visible;
+  }
+
+  table {
+    width: 180%;
+  }
+
+  td img{
+    width: 55px;
+    height: 50px;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+
+    vertical-align: middle;
+  }
+
+  table, th, td{
+    border-collapse: collapse;
+    padding: 1rem;
+    text-align: left;
+    color: white;
+  }
+
+  thead, th {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #5f5f5ffe;
+  }
+
+  tbody tr:nth-child(even){
+    background-color: #0000000b;
+  }
+
+  tbody tr:hover{
+    background-color: #fff6;
+    cursor: pointer;
+  }
+
+  @media (max-width: 1000px) {
+    td:not(:first-of-type){
+        min-width: 12.1rem;
     }
   }
 

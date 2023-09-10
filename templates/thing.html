@@ -21,7 +21,6 @@
   </head>
   <body>
 
-    <div class="canvas"></div>
     <div class="img-area"></div>
     <div class="btn">
       <span class="fas fa-bars"></span>
@@ -69,6 +68,8 @@
             $(this).addClass("active").siblings().removeClass("active");
         })
     </script>
+
+    
     <div class="loader"></div>
     <div class="searchContainer">
       <input
@@ -82,5 +83,26 @@
       </a>
     </div>
     <div class="itemHolder"></div>
+    
+    <main class="table">
+      <section class="table__body">
+          <table>
+              <thead>
+                  <tr>
+                      <th>#</th>
+                      <th></th>
+                      <th>Brand</th>
+                      <th>Name</th>
+                      <th>Price</th>
+                      <th>Sale</th>
+                      <th>Rating</th>
+                      <th>Reviews</th>
+
+                  </tr>
+              </thead>
+              <tbody class="items-table"></tbody>
+          </table>
+      </section>
+  </main>
   </body>
 </html>

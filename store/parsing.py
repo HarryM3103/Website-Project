@@ -168,7 +168,7 @@ def item_parser(data):
     return gpu_List
 
 
-def sort_best_value(data) -> list[ProductItem]:
+def sort_best_value(data) -> list[str]:
     item_list: list[ProductItem] = item_parser(data)
     bayasian_list: list[ProductItem] = []
     for item in item_list:
@@ -179,7 +179,7 @@ def sort_best_value(data) -> list[ProductItem]:
         key=lambda x: (x.bayasian_avg, -x.current_price, x.savings),
         reverse=True,
     )
-    result: list[ProductItem] = []
+    result: list[str] = []
     for item in sorted_bayasian:
         result.append(item.item_to_list())
     return result[:50]
