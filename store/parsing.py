@@ -124,56 +124,53 @@ def data_collector(search, page_num, data_store):
     data_store.put(data)
 
 
-def item_parser(data):
-    gpu_List: list[ProductItem] = []
-    for entries in data:
-        gpu = ProductItem()
-        gpu.image = entries[0]
-        gpu.brand = entries[1]
-        gpu.link = entries[2]
-        gpu.name = entries[3]
-        if entries[4] is not None:
+def item_parser(data_entry):
+    product = ProductItem()
+    product.image = data_entry[0]
+    product.brand = data_entry[1]
+    product.link = data_entry[2]
+    product.name = data_entry[3]
+    if data_entry[4] is not None:
+        try:
+            product.current_price = float(data_entry[4].split("$")[1])
+        except:
             try:
-                gpu.current_price = float(entries[4].split("$")[1])
+                product.current_price = float(
+                    data_entry[4].split("$")[1].replace(",", ""))
             except:
-                try:
-                    gpu.current_price = float(
-                        entries[4].split("$")[1].replace(",", ""))
-                except:
-                    continue
-        if entries[5] is not None:
+                return
+    if data_entry[5] is not None:
+        try:
+            product.previous_price = float(data_entry[5].split("$")[1])
+        except:
+            product.previous_price = float(
+                data_entry[5].split("$")[1].replace(",", ""))
+    if data_entry[6] is not None:
+        product.savings = int(data_entry[6].split("%")[0])
+    if data_entry[7] is not None:
+        product.shipping = data_entry[7]
+    if data_entry[8] is not None:
+        product.item_rating = float(data_entry[8].split()[1])
+    if data_entry[9] is not None:
+        try:
+            product.ratings_num = int(data_entry[9])
+        except:
             try:
-                gpu.previous_price = float(entries[5].split("$")[1])
+                product.ratings_num = int(data_entry[9].replace(",", ""))
             except:
-                gpu.previous_price = float(
-                    entries[5].split("$")[1].replace(",", ""))
-        if entries[6] is not None:
-            gpu.savings = int(entries[6].split("%")[0])
-        if entries[7] is not None:
-            gpu.shipping = entries[7]
-        if entries[8] is not None:
-            gpu.item_rating = float(entries[8].split()[1])
-        if entries[9] is not None:
-            try:
-                gpu.ratings_num = int(entries[9])
-            except:
-                try:
-                    gpu.ratings_num = int(entries[9].replace(",", ""))
-                except:
-                    gpu.ratings_num = 0
-        if any(x.name == entries[3] for x in gpu_List):
-            continue
-        else:
-            gpu_List.append(gpu)
-    return gpu_List
+                product.ratings_num = 0
+    return product
 
 
 def sort_best_value(data) -> list[str]:
-    item_list: list[ProductItem] = item_parser(data)
+    item_list: list[ProductItem] = map(item_parser, data)
     bayasian_list: list[ProductItem] = []
     for item in item_list:
-        item.bayasian_calc()
-        bayasian_list.append(item)
+        try:
+            item.bayasian_calc()
+            bayasian_list.append(item)
+        except:
+            continue
     sorted_bayasian = sorted(
         bayasian_list,
         key=lambda x: (x.bayasian_avg, -x.current_price, x.savings),

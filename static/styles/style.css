@@ -424,7 +424,7 @@ nav ul li a span.rotate{
     width: 55px;
     height: 50px;
     margin-right: 0.5rem;
-    border-radius: 50%;
+    /* border-radius: 50%; */
 
     vertical-align: middle;
   }
@@ -435,6 +435,7 @@ nav ul li a span.rotate{
     text-align: left;
     color: white;
   }
+
 
   thead, th {
     position: sticky;

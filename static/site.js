@@ -1,4 +1,4 @@
-var page_loaded = false; //Global variable determining if the page has already been loaded with content
+let page_loaded = false; //Global variable determining if the page has already been loaded with content
 
 // TODO Finish documenting site.js
 
@@ -15,7 +15,7 @@ function send_data() {
     }, 500);
   }
 
-  var item_type = document.getElementById("item_type").value;
+  let item_type = document.getElementById("item_type").value;
   $.ajax({
     url: "/data_received",
     type: "POST",
@@ -47,11 +47,11 @@ function parse_data(data) {
     }
     // document.documentElement.style.setProperty('--rating', rating)
     let code = `\
-        <tr onclick="window.location='${data[i][2]}';">
+        <tr onclick="window.open('${data[i][2]}', '_blank');">
             <td>${i+1}</td>
             <td><img src=${data[i][0]} alt=""></td>
             <td>${data[i][1]}</td>
-            <td>${data[i][3]}</td>
+            <td class="item-name">${data[i][3]}</td>
             <td>$${data[i][4]}</td>
             <td>${data[i][6]}%</td>
             <td>${data[i][8]}</td>
