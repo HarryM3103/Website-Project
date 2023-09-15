@@ -1,10 +1,7 @@
-import json
-import threading
-from queue import Queue
-import csv
+import multiprocessing as mp
+from multiprocessing import Queue
 from flask import Flask, render_template, request
 from store.parsing import sort_best_value, data_collector
-from store.ProductItem import ProductItem
 
 
 app = Flask(__name__)
@@ -30,30 +27,27 @@ def data_received():
         return ("", 204)  # return a response
 
 
-def threading_search():
+def processing_search():
     pure_data = []  # Declare the optimized data list, pure_data
-    threads = []  # Declare the threads list
-    q = Queue()  # Instantiate the queue object
+    processes = []  # Declare the processes list
+    raw_data: list[Queue] = []
 
-    # Make as many threads as there are pages to search
+    # Make as many processes as there are pages to search
     for i in range(PAGES_TO_SEARCH):
-        # Instantiate the the thread, giving the "data_collector()" as the target function
-        t = threading.Thread(target=data_collector, args=(SEARCH, i, q,))
-        t.daemon = True  # Set daemon to true
-        threads.append(t)  # Append the thread to the threads list
+        q = Queue()
+        p = mp.Process(target=data_collector, args=(SEARCH, i+1, q,))  # Instantiate the process, giving the "data_collector()" as the target function
+        p.daemon = True
+        processes.append(p)  # Append the process to the processes list
+        raw_data.append(q)
 
-    # Loop through the threads list and start the threads
+    # Loop through the processes list and start the processes
     for i in range(PAGES_TO_SEARCH):
-        threads[i].start()
+        processes[i].start()
 
-    # Loop through the threads list and join the threads
-    for i in range(PAGES_TO_SEARCH):
-        threads[i].join()
-
-    # Loop throught the queue containing the raw data from "data_collector()"
-    for info in list(q.get()):
-        # Append the raw data to the optimized data list
-        pure_data.append(info)
+    # Loop through the queue containing the raw data from "data_collector()"
+    for queue in raw_data:
+        for info in list(queue.get()):
+            pure_data.append(info)
     info = sort_best_value(
         pure_data
     )  # Set the variable, info,  to the return value of sort_best_value()
@@ -63,7 +57,7 @@ def threading_search():
 
 @app.route("/data_sent")
 def data_sent():
-    frontend_info = threading_search()
+    frontend_info = processing_search()
     return frontend_info   # return the info to the frontend
 
 

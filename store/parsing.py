@@ -1,16 +1,19 @@
 import requests
 from bs4 import BeautifulSoup
+from multiprocessing import Queue
 from store.ProductItem import ProductItem
 
 # TODO Finish documenting parsing.py
 
+RAW_DATA = []
 
-def data_collector(search, page_num, data_store):
+
+def data_collector(search: str, page_num: int, data_store: Queue):
     data = []
     revised_search = search.replace(" ", "+")
-    url = "https://www.newegg.com/p/pl?d=" + revised_search
+    url = f"https://www.newegg.com/p/pl?n=4841&d={revised_search}&page={str(page_num)}"
 
-    site = requests.get(url + "&pages=" + str(page_num))
+    site = requests.get(url)
     page = BeautifulSoup(site.content, "html.parser")
 
     containers = page.find_all("div", {"class": "item-container"})
@@ -124,7 +127,7 @@ def data_collector(search, page_num, data_store):
     data_store.put(data)
 
 
-def item_parser(data_entry):
+def item_parser(data_entry: list[str]) -> ProductItem:
     product = ProductItem()
     product.image = data_entry[0]
     product.brand = data_entry[1]
@@ -146,7 +149,10 @@ def item_parser(data_entry):
             product.previous_price = float(
                 data_entry[5].split("$")[1].replace(",", ""))
     if data_entry[6] is not None:
-        product.savings = int(data_entry[6].split("%")[0])
+        try:
+            product.savings = int(data_entry[6].split("%")[0])
+        except:
+            product.savings = 0
     if data_entry[7] is not None:
         product.shipping = data_entry[7]
     if data_entry[8] is not None:
@@ -162,8 +168,8 @@ def item_parser(data_entry):
     return product
 
 
-def sort_best_value(data) -> list[str]:
-    item_list: list[ProductItem] = map(item_parser, data)
+def sort_best_value(data: list[list[str]]) -> list[str]:
+    item_list: map[ProductItem] = map(item_parser, data)
     bayasian_list: list[ProductItem] = []
     for item in item_list:
         try:

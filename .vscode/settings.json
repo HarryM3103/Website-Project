@@ -6,5 +6,6 @@
     "editor.defaultFormatter": "ms-python.autopep8"
   },
   "python.formatting.provider": "none",
-  "python.linting.mypyEnabled": false
+  "python.linting.mypyEnabled": false,
+  "python.linting.pylintEnabled": false
 }

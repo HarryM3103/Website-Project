@@ -32,56 +32,16 @@ class ProductItem:
         self.bayasian_avg = (
             (self.item_rating * self.ratings_num) + 4) / new_ratings
 
-    def item_to_list(self):
-        string_list = []
-        try:
-            string_list.append(self.image)
-        except:
-            string_list.append("None")
-
-        try:
-            string_list.append(self.brand)
-        except:
-            string_list.append("None")
-
-        try:
-            string_list.append(self.link)
-        except:
-            string_list.append("None")
-
-        try:
-            string_list.append(self.name)
-        except:
-            string_list.append("None")
-
-        try:
-            string_list.append(str(self.current_price))
-        except:
-            string_list.append("None")
-
-        try:
-            string_list.append(str(self.previous_price))
-        except:
-            string_list.append("None")
-
-        try:
-            string_list.append(str(self.savings))
-        except:
-            string_list.append("None")
-
-        try:
-            string_list.append(self.shipping)
-        except:
-            string_list.append("None")
-
-        try:
-            string_list.append(str(self.item_rating))
-        except:
-            string_list.append("None")
-
-        try:
-            string_list.append(str(self.ratings_num))
-        except:
-            string_list.append("None")
-
+    def item_to_list(self) -> list[str]:
+        string_list = [
+            self.image,
+            self.brand,
+            self.link,
+            self.name,
+            str(self.current_price),
+            str(self.previous_price),
+            str(self.savings),
+            self.shipping,
+            str(self.item_rating),
+            str(self.ratings_num)]
         return string_list
