@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="\static\site.js"></script>
+    <script
+      src="https://kit.fontawesome.com/997635d164.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Harry's Newegg Algorithm</title>
+    <link rel="stylesheet" href="/static/styles/style.css" />
+    <link 
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" 
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" 
+        crossorigin="anonymous" 
+        referrerpolicy="no-referrer" 
+    />
+  </head>
+  <body>
+
+    <div class="img-area"></div>
+    <div class="btn">
+      <span class="fas fa-bars"></span>
+    </div>
+    <nav class="sidebar">
+        <div class="text">Side Menu</div>
+        <ul>
+            <li><a href="./thing.html">Home</a></li>
+            <li><a href="#">About Us
+              <span class="fa-solid fa-question"></span>
+            </a></li>
+            <li>
+                <a href="#" class="store-btn">Store Sections
+                    <span class="fas fa-caret-down first"></span>
+                </a>
+                <ul class="store-show">
+                    <li><a href="#">Graphics Cards</a></li>
+                    <li><a href="#">CPU's</a></li>
+                    <li><a href="#">Motherboards</a></li>
+                    <li><a href="#">Ram</a></li>
+                    <li><a href="#">Storage</a></li>
+                    <li><a href="#">Power Supplies</a></li>
+                    <li><a href="#">Cases</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Favorites
+              <span class="fa-solid fa-heart"></span>
+            </a></li>
+            <li><a target="_blank" rel="noopener noreferrer" href="https://forms.gle/hW2Bq6HYBHV4N3ZK6">Feedback
+              <span class="fa-solid fa-pen-to-square"></span>
+            </a></li>
+        </ul>
+    </nav>
+    
+    <script>
+    $('.btn').click(function(){
+        $(this).toggleClass("click");
+        $('.sidebar').toggleClass("show");
+    })
+        $('.store-btn').click(function(){
+            $('nav ul .store-show').toggleClass("show");
+            $('nav ul .first').toggleClass("rotate");
+        });
+        $('nav ul li').click(function(){
+            $(this).addClass("active").siblings().removeClass("active");
+        })
+    </script>
+
+    
+    <div class="loader"></div>
+    <div class="searchContainer">
+      <input
+        type="text"
+        class="search-txt"
+        id="item_type"
+        placeholder="What are you looking for?"
+      />
+      <a href="#" class="search-btn" onclick="send_data()">
+        <i class="fas fa-search"></i>
+      </a>
+    </div>
+    <div class="itemHolder"></div>
+    
+    <main class="table">
+      <section class="table__body">
+          <table>
+              <thead>
+                  <tr>
+                      <th>#</th>
+                      <th></th>
+                      <th>Brand</th>
+                      <th>Name</th>
+                      <th>Price</th>
+                      <th>Sale</th>
+                      <th>Rating</th>
+                      <th>Reviews</th>
+
+                  </tr>
+              </thead>
+              <tbody class="items-table"></tbody>
+          </table>
+      </section>
+  </main>
+  </body>
+</html>
