@@ -36,7 +36,7 @@ def data_collector(search: str, page_num: int, data_store: Queue):
         search = f"{search} items"
     revised_search = search.replace(" ", "+")
 
-    url = f"https://www.newegg.com/p/pl?n=4841&d={revised_search}&page={str(page_num)}"
+    url = f"https://www.newegg.com/p/pl?d={revised_search}&page={str(page_num)}"
 
     site = requests.get(url)
     page = BeautifulSoup(site.content, "html.parser")

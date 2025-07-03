@@ -35,7 +35,8 @@ def processing_search():
     # Make as many processes as there are pages to search
     for i in range(PAGES_TO_SEARCH):
         q = Queue()
-        p = mp.Process(target=data_collector, args=(SEARCH, i+1, q,))  # Instantiate the process, giving the "data_collector()" as the target function
+        # Instantiate the process, giving the "data_collector()" as the target function
+        p = mp.Process(target=data_collector, args=(SEARCH, i+1, q,))
         p.daemon = True
         processes.append(p)  # Append the process to the processes list
         raw_data.append(q)
