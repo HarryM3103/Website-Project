@@ -33,7 +33,7 @@ def data_collector(search: str, page_num: int, data_store: Queue):
     data = []
 
     if search in HARDWARE_COMPANIES:
-        search = f"{search} products"
+        search = f"{search} items"
     revised_search = search.replace(" ", "+")
 
     url = f"https://www.newegg.com/p/pl?n=4841&d={revised_search}&page={str(page_num)}"
@@ -42,6 +42,8 @@ def data_collector(search: str, page_num: int, data_store: Queue):
     page = BeautifulSoup(site.content, "html.parser")
 
     containers = page.find_all("div", {"class": "item-container"})
+    if not containers:
+        containers = page.find_all("div", {"class": "item-container position-relative"})
 
     for container in containers:
         if (container.find("i", {"class": "fas fa-info-circle-light"}) is not None):

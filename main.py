@@ -32,9 +32,6 @@ def processing_search():
     processes = []  # Declare the processes list
     raw_data: list[Queue] = []
 
-    q = Queue()
-    data_collector(SEARCH, 1, q)
-
     # Make as many processes as there are pages to search
     for i in range(PAGES_TO_SEARCH):
         q = Queue()
