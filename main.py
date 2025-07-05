@@ -24,7 +24,7 @@ def data_received():
         SEARCH = request.form.get(
             "name"
         )  # Set the global variable to the data sent by the 'POST' request
-        return ("", 204)  # return a response
+        return '', 204  # return a response
 
 
 def processing_search():
@@ -63,7 +63,7 @@ def data_sent():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8000)
+    app.run(debug=True, host='0.0.0.0')
 
 
 # sort = sort_best_value()
