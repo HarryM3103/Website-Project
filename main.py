@@ -24,7 +24,7 @@ def data_received():
         SEARCH = request.form.get(
             "name"
         )  # Set the global variable to the data sent by the 'POST' request
-        return ("", 204)  # return a response
+        return '', 204  # return a response
 
 
 def processing_search():
@@ -35,7 +35,8 @@ def processing_search():
     # Make as many processes as there are pages to search
     for i in range(PAGES_TO_SEARCH):
         q = Queue()
-        p = mp.Process(target=data_collector, args=(SEARCH, i+1, q,))  # Instantiate the process, giving the "data_collector()" as the target function
+        # Instantiate the process, giving the "data_collector()" as the target function
+        p = mp.Process(target=data_collector, args=(SEARCH, i+1, q,))
         p.daemon = True
         processes.append(p)  # Append the process to the processes list
         raw_data.append(q)
@@ -62,7 +63,7 @@ def data_sent():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8000)
+    app.run(debug=True, host='0.0.0.0')
 
 
 # sort = sort_best_value()
