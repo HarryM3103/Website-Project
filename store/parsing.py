@@ -103,6 +103,7 @@ def item_parser(data_entry: list[str]) -> ProductItem:
                 previous_price.split("$")[1].replace(",", ""))
     if savings is not None:
         try:
+            savings = savings.replace('(', '').replace(')', '')
             product.savings = int(savings.split("%")[0])
         except:  # noqa: E722
             product.savings = 0
