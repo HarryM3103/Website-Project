@@ -6,6 +6,7 @@ from store.ProductItem import ProductItem
 
 # TODO Finish documenting parsing.py
 
+OK_CODE = 200
 RAW_DATA = []
 HARDWARE_COMPANIES = [
     "intel",
@@ -51,7 +52,7 @@ def data_collector(search: str, page_num: int, data_store: Queue):
 
     site = urlopen(Request(url, headers=headers))
 
-    if site.getcode() == 200:
+    if site.getcode() == OK_CODE:
         page = BeautifulSoup(site.read(), "html.parser")
 
         containers = page.find_all(
@@ -177,36 +178,43 @@ def item_parser(data_entry: list[str]) -> ProductItem:
     product.brand = data_entry[1]
     product.link = data_entry[2]
     product.name = data_entry[3]
-    if data_entry[4] is not None:
+
+    current_price = data_entry[4]
+    previous_price = data_entry[5]
+    savings = data_entry[6]
+    shipping = data_entry[7]
+    item_rating = data_entry[8]
+    ratings = data_entry[9]
+    if current_price is not None:
         try:
-            product.current_price = float(data_entry[4].split("$")[1])
+            product.current_price = float(current_price.split("$")[1])
         except:
             try:
                 product.current_price = float(
-                    data_entry[4].split("$")[1].replace(",", ""))
+                    current_price.split("$")[1].replace(",", ""))
             except:
                 return
-    if data_entry[5] is not None:
+    if previous_price is not None:
         try:
-            product.previous_price = float(data_entry[5].split("$")[1])
+            product.previous_price = float(previous_price.split("$")[1])
         except:
             product.previous_price = float(
-                data_entry[5].split("$")[1].replace(",", ""))
-    if data_entry[6] is not None:
+                previous_price.split("$")[1].replace(",", ""))
+    if savings is not None:
         try:
-            product.savings = int(data_entry[6].split("%")[0])
+            product.savings = int(savings.split("%")[0])
         except:
             product.savings = 0
-    if data_entry[7] is not None:
-        product.shipping = data_entry[7]
-    if data_entry[8] is not None:
-        product.item_rating = float(data_entry[8].split()[1])
-    if data_entry[9] is not None:
+    if shipping is not None:
+        product.shipping = shipping
+    if item_rating is not None:
+        product.item_rating = float(item_rating.split()[1])
+    if ratings is not None:
         try:
-            product.ratings_num = int(data_entry[9])
+            product.ratings_num = int(ratings)
         except:
             try:
-                product.ratings_num = int(data_entry[9].replace(",", ""))
+                product.ratings_num = int(ratings.replace(",", ""))
             except:
                 product.ratings_num = 0
     return product
