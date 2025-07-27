@@ -3,7 +3,7 @@
   src: url(/static/fonts/Poppins-ExtraLight.ttf);
 }
 
-:root{
+:root {
   --accent: #ffb145;
   --primary: #121212;
   --secondary: #414141;
@@ -16,10 +16,6 @@
   box-sizing: border-box;
   font-family: Poppins;
   letter-spacing: 0.3px;
-}
-
-body {
-    background: white
 }
 
 .search-btn,
@@ -36,7 +32,7 @@ body {
   color: inherit;
 }
 
-.btn{
+.btn {
   z-index: 2;
   position: fixed;
   top: 15px;
@@ -50,21 +46,21 @@ body {
   transition: left 0.4s ease;
 }
 
-.btn.click{
+.btn.click {
   left: 260px;
 }
 
-.btn span{
+.btn span {
   color: white;
   font-size: 28px;
   line-height: 45px;
 }
 
-.btn.click span:before{
-  content: '\f00d';
+.btn.click span:before {
+  content: "\f00d";
 }
 
-.sidebar{
+.sidebar {
   z-index: 2;
   top: 0px;
   position: fixed;
@@ -75,37 +71,37 @@ body {
   transition: left 0.4s ease;
 }
 
-.sidebar.show{
+.sidebar.show {
   left: 0px;
 }
 
-.sidebar .text{
+.sidebar .text {
   color: white;
   font-size: 25px;
   font-weight: 600;
-  line-height:65px;
+  line-height: 65px;
   text-align: center;
   background: #1e1e1e;
   letter-spacing: 1px;
 }
 
-nav ul{
+nav ul {
   background: #1b1b1b;
   height: 100%;
   width: 100%;
   list-style: none;
 }
 
-nav ul li{
+nav ul li {
   line-height: 60px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-nav ul li:last-child{
+nav ul li:last-child {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-nav ul li a{
+nav ul li a {
   position: relative;
   color: white;
   text-decoration: none;
@@ -117,46 +113,43 @@ nav ul li a{
   border-left: 3px solid transparent;
 }
 
-nav ul li.active a{
+nav ul li.active a {
   color: #ffb145;
   background: #1e1e1e;
   border-left-color: #ffb145;
-
 }
 
-nav ul ul{
-  position: static; 
+nav ul ul {
+  position: static;
   display: none;
 }
 
-nav ul .store-show.show{
-  display:block;
+nav ul .store-show.show {
+  display: block;
 }
 
-nav ul ul li{
+nav ul ul li {
   line-height: 42px;
-  border-bottom: none;  
+  border-bottom: none;
 }
 
-nav ul ul li a{
+nav ul ul li a {
   font-size: 17px;
   color: #e6e6e6;
-
 }
 
-nav ul li.active ul li a{
+nav ul li.active ul li a {
   color: #e6e6e6;
   background: #1b1b1b;
   border-left-color: transparent;
-
 }
 
-nav ul ul li a:hover{
-  color: #ffb145!important;
-  background: #1e1e1e!important;
+nav ul ul li a:hover {
+  color: #ffb145 !important;
+  background: #1e1e1e !important;
 }
 
-nav ul li a span{
+nav ul li a span {
   position: absolute;
   top: 50%;
   right: 20px;
@@ -165,7 +158,7 @@ nav ul li a span{
   transition: transform 0.4s;
 }
 
-nav ul li a span.rotate{
+nav ul li a span.rotate {
   transform: translateY(-50%) rotate(-180deg);
 }
 
@@ -256,11 +249,11 @@ nav ul li a span.rotate{
   top: 10px;
   width: 275px;
   height: 200px;
-} */
+}
 
 
 
-/* .img-area{
+.img-area{
     background-image: url(/static/imgs/149687.jpg);
     background-size: cover;
     -webkit-background-size: cover;
@@ -272,191 +265,92 @@ nav ul li a span.rotate{
 
   } */
 
+.itemHolder {
+  position: absolute;
+  height: 90vh;
+  top: 20%;
+  left: 1%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
 
+.card {
+  z-index: 1;
+  cursor: pointer;
+  display: flex;
+  background: var(--primary);
+  flex-direction: column;
+  min-width: 200px;
+  max-width: 300px;
+  text-align: center;
+  min-height: 370px;
+  border-radius: 1rem;
+  margin: 1.5rem;
+  transition: 0.3s;
+  box-shadow: 0px 12px 20px 0 rgba(25, 25, 25, 0.5);
 
-  .itemHolder{
-    position: absolute;
-    height: 90vh;
-    top: 20%;
-    left: 1%;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+  &:hover {
+    transform: scale(1.1);
   }
 
-  .card {
-    z-index: 1;
-    cursor: pointer;
-    display: flex;
-    background: var(--primary);
-    flex-direction: column;
-    min-width: 200px;
-    max-width: 300px;
-    text-align: center;
-    min-height: 370px;
-    border-radius: 1rem;
-    margin: 1.5rem;
-    transition: 0.3s;
-    box-shadow: 0px 12px 20px 0 rgba(25, 25, 25, 0.5);
+  .cardText {
+    margin: 0.5rem;
+  }
+
+  .itemName {
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     &:hover {
-      transform: scale(1.1);
-    }
-
-
-    .cardText {
-      margin: 0.5rem;
-    }
-
-    .itemName {
-      color: white;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-
-      &:hover {
-        white-space: inherit;
-        text-overflow: inherit;
-        overflow: visible;
-      }
-    }
-
-    .brandText {
-      color: orange;
-    }
-
-    .itemPrice {
-      color: white;
-      font-size: 30px;
-    }
-
-    .rating{
-      flex-direction: row;
-      position:relative;
-      --rating: 5;
-      --stop: calc(var(--rating) / 5 * 100% - var(--starMargin)/2);
-      background-image: linear-gradient(
-         to right,
-         var(--accent) var(--stop),
-         var(--secondary) var(--stop) 
-      );
-      background-clip: text;
-      -webkit-background-clip: text;
-    }
-    
-    
-    .rating *{
-      font-size: 20px;
-      color: transparent;
-      margin-right: var(--starMargin);
-    }
-
-    .rating_num{
-      color: white;
-    }
-
-
-    .numRatings{
-      font-size: 15px;
-      color: white;
-    }
-
-    .savingPercentage {
-      color: var(--accent);
-      font-size: 20px;
+      white-space: inherit;
+      text-overflow: inherit;
+      overflow: visible;
     }
   }
 
-   main.table{
-    width: 180vh;
-    height: 80vh;
-    background-color: rgba(255, 255, 255, 0.067);
+  .brandText {
+    color: orange;
+  }
 
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0.4rem 0.8rem #0005;
-    border-radius: 0.8rem;
+  .itemPrice {
+    color: white;
+    font-size: 30px;
+  }
 
+  .rating {
+    flex-direction: row;
     position: relative;
-    top: 120px;
-    left: 50px;
-    overflow: hidden;
-    visibility: hidden;
+    --rating: 5;
+    --stop: calc(var(--rating) / 5 * 100% - var(--starMargin) / 2);
+    background-image: linear-gradient(
+      to right,
+      var(--accent) var(--stop),
+      var(--secondary) var(--stop)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
   }
 
-  .table__header {
-    width: 100%;
-    height: 10%;
-    background-color: #fff4;
-    padding: 0.8rem 1rem
+  .rating * {
+    font-size: 20px;
+    color: transparent;
+    margin-right: var(--starMargin);
   }
 
-  .table__body {
-    width: 95%;
-    max-height: calc(89% - 1.6rem);
-    background-color: rgba(26, 26, 26, 0.733);
-
-    margin: 0.8rem auto;
-    border-radius: 0.6rem;
-
-    overflow: auto;
-  }
-
-  .table__body::-webkit-scrollbar{
-    width: 0.5rem;
-    height: 0.5rem;
-  }
-
-  .table__body::-webkit-scrollbar-thumb{
-    border-radius: 0.5rem;
-    background-color: rgba(255, 255, 255, 0.267);
-    visibility: hidden;
-  }
-
-  .table__body:hover::-webkit-scrollbar-thumb{
-    visibility: visible;
-  }
-
-  table {
-    width: 180%;
-  }
-
-  td img{
-    width: 55px;
-    height: 50px;
-    margin-right: 0.5rem;
-    /* border-radius: 50%; */
-
-    vertical-align: middle;
-  }
-
-  table, th, td{
-    border-collapse: collapse;
-    padding: 1rem;
-    text-align: left;
+  .rating_num {
     color: white;
   }
 
-
-  thead, th {
-    position: sticky;
-    top: 0;
-    left: 0;
-    background-color: #5f5f5ffe;
+  .numRatings {
+    font-size: 15px;
+    color: white;
   }
 
-  tbody tr:nth-child(even){
-    background-color: #0000000b;
+  .savingPercentage {
+    color: var(--accent);
+    font-size: 20px;
   }
-
-  tbody tr:hover{
-    background-color: #fff6;
-    cursor: pointer;
-  }
-
-  @media (max-width: 1000px) {
-    td:not(:first-of-type){
-        min-width: 12.1rem;
-    }
-  }
-
-
+}
